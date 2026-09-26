@@ -1,36 +1,23 @@
-# Prevalence Stress Notebook
+# 📉 Axis 3: Prevalence Stress Testing
 
-Notebook: `prevalence_stress_colab.ipynb`
+This module evaluates model sensitivity to non-stationary fraud base rates using controlled downsampling across multiple prevalence tiers.
 
-Purpose:
+## 📓 Notebook
 
-- Test whether strict fraud detectors remain stable when the fraud rate in the test stream changes.
-- Train once on natural training data.
-- Select one cost-sensitive threshold on natural validation data.
-- Evaluate the fixed model and fixed threshold across multiple target fraud prevalences.
+- **`prevalence_stress_colab.ipynb`**: Conducts deterministic downsampling across 6 target fraud prevalence ratios ($\pi \in \{0.0001 \dots 0.05\}$).
 
-Expected Colab T4 runtime:
+## 📂 Folder Contents
 
-- About 35-70 minutes for the full five-seed run.
-- If Google Drive is slow, allow up to 90 minutes.
+- **`figures/`**: Generated figures (PNG at 600 DPI and vector PDF):
+  - `fig05_prevalence_profile_heatmap.png` / `.pdf`: Primary audit heatmap across prevalence shift conditions.
+  - `supp_prevalence_precision_curve.png` / `.pdf`: Precision decay curves across downsampled base rates.
+  - `prevalence_cost_sensitivity_heatmap.png`: Operating cost variations under base-rate shifts.
+  - `prevalence_mcc_curve.png`: MCC stability curves.
+- **`results/`**: Output data:
+  - `table08_prevalence_profile_component.csv`: Component-by-component fragility labels.
+  - `prevalence_profile_per_target.csv`: Per-target prevalence performance records.
+  - `checkpoints/`: Seed and ratio checkpoint CSVs.
 
-Outputs:
+## 🎯 Key Findings
 
-- `results/prevalence_stress_results.csv`
-- `results/prevalence_sensitivity_index.csv`
-- `results/prevalence_stress_summary_by_prevalence.csv`
-- `results/prevalence_sensitivity_summary.csv`
-- 600-DPI PNG/PDF figures under `figures/`
-- `run_summary.json`
-- `logs/run.log`
-
-Resume behavior:
-
-- Rerun from the top after disconnect.
-- Existing seed/dataset/model checkpoint CSVs are skipped.
-
-Paper interpretation:
-
-- Precision and cost are expected to be highly prevalence-sensitive.
-- The trained model and threshold are intentionally fixed, so changes reflect operating-environment shift rather than retraining.
-- This milestone supports the paper's operational robustness framework.
+- **High Operational Fragility:** **29 out of 36** evaluated prevalence-profile components were labeled operationally **Fragile**, indicating extreme vulnerability to base-rate fluctuations in production streams.

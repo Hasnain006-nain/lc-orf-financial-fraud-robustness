@@ -1,39 +1,24 @@
-# Explanation Stability Notebook
+# 🔍 Axis 5: Explanation Stability
 
-Notebook: `explanation_stability_colab.ipynb`
+This module audits the stability of explainable AI (XAI) feature attributions (Tree SHAP and feature importances) across random seeds and temporal splits.
 
-Purpose:
+## 📓 Notebook
 
-- Test whether strict model explanations remain stable across random seeds.
-- Test whether top feature rankings change between random stratified and chronological evaluation.
-- Aggregate transformed one-hot/scaled features back to original governed feature names.
-- Report Top-K Jaccard stability, weighted importance overlap, rank correlation, and explanation instability.
+- **`explanation_stability_colab.ipynb`**: Measures attribution rank correlation (Spearman $\rho$), Top-$K$ Jaccard overlap, and the *Explanation Reliability Gap*.
 
-Expected Colab T4 runtime:
+## 📂 Folder Contents
 
-- About 50-90 minutes for the full five-seed run.
-- If Google Drive is slow, allow up to 2 hours.
+- **`figures/`**: Generated figures (PNG at 600 DPI and vector PDF):
+  - `fig07_explanation_reliability_gap.png` / `.pdf`: Primary visualization demonstrating the gap between stable attribution ranks and predictive degradation.
+  - `supp_protocol_explanation_instability_heatmap.png` / `.pdf`: Protocol-level explanation correlation heatmap.
+  - `seed_explanation_stability_top5.png`: Top-5 feature attribution stability across random seeds.
+  - `top_strict_features_D1.png`, `top_strict_features_D2.png`, `top_strict_features_D3.png`: Dominant feature rankings per dataset.
+- **`results/`**: Output data:
+  - `table06_explanation_reliability_gap.csv`: Quantified explanation reliability gap metrics.
+  - `top_feature_stability_summary.csv`: Summary of top feature stability across protocols.
+  - `seed_explanation_stability_summary.csv`: Multiseed stability metrics.
+  - `checkpoints/`: Seed-level metric and importance checkpoint CSVs.
 
-Outputs:
+## 🎯 Key Findings
 
-- `results/explanation_model_metrics.csv`
-- `results/feature_importance_rankings.csv`
-- `results/seed_explanation_stability_index.csv`
-- `results/protocol_explanation_stability_index.csv`
-- `results/seed_explanation_stability_summary.csv`
-- `results/protocol_explanation_stability_summary.csv`
-- `results/top_feature_stability_summary.csv`
-- 600-DPI PNG/PDF figures under `figures/`
-- `run_summary.json`
-- `logs/run.log`
-
-Resume behavior:
-
-- Rerun from the top after disconnect.
-- Existing seed/dataset/split/model metric and importance checkpoint CSVs are skipped.
-
-Paper interpretation:
-
-- High Top-K Jaccard means explanations are stable.
-- High instability means the paper should avoid overclaiming a single universal explanation.
-- Native tree importances are model explanations, not causal explanations.
+- **The Explanation Reliability Gap:** Top feature rankings remained highly correlated (Spearman $\rho > 0.90$) even when models suffered severe temporal predictive collapse (AP drop $> 0.20$), showing that stable explanations do not imply reliable predictions.

@@ -5,18 +5,18 @@
 
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-LC--ORF-10B981?style=for-the-badge&logo=shield&logoColor=white)](#-framework-architecture)
-[![Colab GPU](https://img.shields.io/badge/Colab-GPU%20Ready-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](#-notebook-suite--quickstart)
-[![Bootstrap](https://img.shields.io/badge/Audit-1000%20Bootstraps-6366F1?style=for-the-badge)](#-key-empirical-findings)
+[![Colab Ready](https://img.shields.io/badge/Google_Colab-T4_GPU_Ready-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](#-experiment-modules--notebook-suite)
+[![Audit](https://img.shields.io/badge/Bootstrap-1000_Replicates-6366F1?style=for-the-badge)](#-key-empirical-findings)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <br/>
 
 [**Overview**](#-overview) •
-[**Framework Architecture**](#-framework-architecture) •
-[**The 6 Audit Axes**](#-the-six-operational-audit-axes) •
+[**Framework Workflow**](#-framework-architecture) •
+[**Modules & Notebooks**](#-experiment-modules--notebook-suite) •
 [**Key Findings**](#-key-empirical-findings) •
 [**Datasets & Governance**](#-datasets--governance) •
-[**Colab Suite**](#-notebook-suite--quickstart) •
+[**Quickstart**](#-quickstart-guide) •
 [**Citation**](#-citation)
 
 ---
@@ -25,66 +25,54 @@
 
 ## 💡 Overview
 
-In production financial ecosystems, fraud detection models frequently experience catastrophic failure post-deployment. The root cause is a systemic scientific disconnect: **models are routinely evaluated as static leaderboard benchmarks** using single-split metrics (such as ROC-AUC) that completely hide real-world operational vulnerabilities.
+In deployed financial fraud detection systems, models often experience dramatic post-deployment degradation. The root cause is a fundamental evaluation gap: **fraud models are traditionally evaluated as static leaderboard benchmarks** using single random splits and summary metrics (e.g., ROC-AUC) that mask operational hazards:
 
-**LC-ORF (Leakage-Controlled Operational Robustness Framework)** bridges the gap between laboratory evaluation and operational reality. Instead of treating evaluation as a passive test split, LC-ORF enforces an active, multi-axis operational stress-testing audit protocol.
+* 🚨 **Preprocessing Leakage:** Resampling (such as SMOTE) or normalization applied prior to data splitting leaks future distribution information into the training set.
+* 📉 **Temporal Invalidation:** Random splits allow models to peek into the future, hiding severe performance collapse under true chronological transaction arrival.
+* ⚠️ **Prevalence Shifts:** The base fraud rate fluctuates continuously in production, causing severe false alarm spikes if models are sensitive to prevalence changes.
+* 🎯 **Uncalibrated Probability Scores:** Classification rankings do not guarantee calibrated probabilities for automated cutoff thresholding and risk scoring.
+* 🔍 **The Explanation Reliability Gap:** Feature attribution rankings (e.g. Tree SHAP) can remain superficially stable even while predictive performance collapses.
+* ⏱️ **Alert-Budget Bottlenecks:** Human review teams have hard daily alert capacities; high recall at arbitrary thresholds is operationally useless without high precision in the top budget tiers (e.g., top 1% or 2%).
 
-```
-┌──────────────────────────────────────────────┐       ┌──────────────────────────────────────────────┐
-│       ❌ Traditional Fraud Evaluation        │       │             ✅ The LC-ORF Paradigm           │
-├──────────────────────────────────────────────┤       ├──────────────────────────────────────────────┤
-│ • Static random train/test splits            │  ───► │ • Chronological & population-drift audits    │
-│ • Resampling/scaling before data splitting   │       │ • Strict leakage-safe feature governance     │
-│ • Unchecked SMOTE performance inflation      │       │ • Unsafe vs. safe reference-stress deltas    │
-│ • Fixed prevalence base-rate assumptions     │       │ • Deterministic prevalence stress testing    │
-│ • Blind trust in static SHAP feature ranks   │       │ • Audit of Explanation Reliability Gaps      │
-│ • Theoretical metrics ignoring alert budgets │       │ • Realistic human-analyst review constraints │
-└──────────────────────────────────────────────┘       └──────────────────────────────────────────────┘
-```
+**LC-ORF (Leakage-Controlled Operational Robustness Framework)** introduces an active audit methodology. Instead of accepting a single leaderboard score, LC-ORF evaluates models across controlled reference-stress scenario pairs, producing auditable operational profiles backed by 1,000 paired bootstrap iterations.
 
 ---
 
 ## 🏛️ Framework Architecture
 
 <div align="center">
-  <img src="assets/fig01_lcorf_framework_workflow.png" alt="LC-ORF Operational Robustness Workflow" width="92%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"/>
-  <p><em><strong>Figure 1:</strong> LC-ORF operational robustness workflow. Models undergo controlled perturbations across leakage, temporal ordering, base-rate prevalence, calibration, explanation stability, and alert-budget capacity.</em></p>
+  <img src="assets/fig01_lcorf_framework_workflow.png" alt="LC-ORF Operational Robustness Workflow" width="94%" style="border-radius: 8px; border: 1px solid #e1e4e8;"/>
+  <p><em><strong>Figure 1:</strong> LC-ORF operational robustness workflow. The framework audits fraud-detection models under controlled changes in leakage, temporal protocol, prevalence, calibration, explanation stability, and alert-budget capacity.</em></p>
 </div>
 
-The LC-ORF protocol executes in **five standardized stages**:
+The LC-ORF protocol executes in **five structured stages**:
 
-1. **Stage 1 (Benchmark Ingestion):** Diverse transaction streams spanning card payments, merchant terminals, and mobile money.
+1. **Stage 1 (Public Fraud Datasets):** Multi-domain benchmark evaluation covering European card transactions (D1), simulated merchant terminal streams (D2), and mobile money transactions (D3).
 2. **Stage 2 (Leakage-Safe Feature Governance):** Systematic removal of transactional identifiers, future variables, and ledger-state balances to establish a leak-free **Strict Main Feature Set**.
-3. **Stage 3 (Scenario-Pair Perturbations):** Paired evaluations comparing reference conditions ($c_0$) against targeted stress conditions ($c_1$) across 6 operational axes.
-4. **Stage 4 (Artifact & Model Layer):** 5-seed tree-based ensemble training (LightGBM & XGBoost) exporting granular predictions (scores, ground-truth labels, decision thresholds).
+3. **Stage 3 (Scenario-Pair Perturbations):** Controlled evaluation comparing reference conditions ($c_0$) against targeted stress conditions ($c_1$) across 6 operational axes.
+4. **Stage 4 (Model & Artifact Layer):** 5-seed tree-based ensemble training (LightGBM & XGBoost) exporting granular predictions (scores, ground-truth labels, decision thresholds).
 5. **Stage 5 (Audit Profile & Significance):** 1,000 paired bootstrap resamples per unit evaluated against metric materiality thresholds to produce auditable **Robust**, **Fragile**, or **Inconclusive** profiles.
 
 ---
 
-## 🔬 The Six Operational Audit Axes
+## 🔬 Experiment Modules & Notebook Suite
 
-LC-ORF formalizes an audit unit as $(d, m, s, a, c_0, c_1, k)$ across datasets $\mathcal{D}$, models $\mathcal{M}$, seeds $\mathcal{S}$, axes $\mathcal{A}$, reference $c_0$, stress $c_1$, and metric $k$:
+Each experiment module is completely self-contained with its own notebook, dedicated `figures/` folder, and dedicated `results/` CSV folder:
 
-| Axis | Reference Scenario ($c_0$) | Perturbed Scenario ($c_1$) | Target Operational Vulnerability | Metric Materiality Bound |
-| :---: | :--- | :--- | :--- | :---: |
-| <img src="https://img.shields.io/badge/Axis_1-Leakage-red?style=flat-square"/> | Safe pipeline inside split | SMOTE-before-split / Post-balance access | Artificially inflated precision & false confidence | $\Delta \text{MCC} \ge +0.05$<br>$\Delta \text{AP} \ge +0.05$ |
-| <img src="https://img.shields.io/badge/Axis_2-Temporal-blue?style=flat-square"/> | Random stratified split | Chronological split (Past $\to$ Future) | Real-world concept drift & consumer pattern shift | $\Delta \text{AP} \le -0.05$<br>$\Delta \text{MCC} \le -0.05$ |
-| <img src="https://img.shields.io/badge/Axis_3-Prevalence-purple?style=flat-square"/> | Native base rate ($\pi_0$) | Downsampled stream ($\pi \in \{0.01\% \dots 5\%\}$) | False-alarm explosion during seasonal rate changes | Component Fragility Rate |
-| <img src="https://img.shields.io/badge/Axis_4-Calibration-orange?style=flat-square"/> | Raw model probabilities | Platt scaling / Isotonic regression | Distortion in automated cutoffs & risk rankings | $\Delta \text{Brier} \le -0.005$<br>$\Delta \text{Cost} \le -0.05$ |
-| <img src="https://img.shields.io/badge/Axis_5-Explanation-green?style=flat-square"/> | Random split attributions | Chronological split attributions | Explanation Reliability Gap (Stable ranks $\neq$ Model safety) | $\text{Rank Corr} > 0.85$<br>when $\Delta \text{AP} < -0.15$ |
-| <img src="https://img.shields.io/badge/Axis_6-Alert_Budget-yellow?style=flat-square"/> | Unconstrained recall | Top 1%, Top 2%, Top 5% review budget | Real-world fraud detection team capacity bottlenecks | Tier Precision & Capture |
+| Module / Audit Axis | Notebook | Dedicated Figures | Dedicated Results & CSVs |
+| :--- | :--- | :--- | :--- |
+| **03. Leakage Stress Testing** | [`leakage_stress_multiseed_colab.ipynb`](03_leakage_stress_testing/leakage_stress_multiseed_colab.ipynb) | [`03_.../figures/`](03_leakage_stress_testing/figures/)<br>• `fig03_multiseed_ap_leakage_inflation_heatmap.png` | [`03_.../results/`](03_leakage_stress_testing/results/)<br>• `table03_key_bootstrap_findings.csv`<br>• Checkpoint CSVs |
+| **06. Temporal Robustness** | [`temporal_robustness_colab.ipynb`](06_temporal_robustness/temporal_robustness_colab.ipynb) | [`06_.../figures/`](06_temporal_robustness/figures/)<br>• `fig04_d2_drift_vs_temporal_drop.png`<br>• `temporal_ap_drop_heatmap.png` | [`06_.../results/`](06_temporal_robustness/results/)<br>• `d2_temporal_drift_diagnostics.csv`<br>• `d2_temporal_drop_summary.csv` |
+| **07. Prevalence Sensitivity** | [`prevalence_stress_colab.ipynb`](07_prevalence_stress_test/prevalence_stress_colab.ipynb) | [`07_.../figures/`](07_prevalence_stress_test/figures/)<br>• `fig05_prevalence_profile_heatmap.png`<br>• `supp_prevalence_precision_curve.png` | [`07_.../results/`](07_prevalence_stress_test/results/)<br>• `table08_prevalence_profile_component.csv`<br>• `prevalence_profile_per_target.csv` |
+| **08. Calibration Analysis** | [`calibration_recalibration_colab.ipynb`](08_calibration_recalibration/calibration_recalibration_colab.ipynb) | [`08_.../figures/`](08_calibration_recalibration/figures/)<br>• `supp_calibration_brier_reduction_by_dataset.png`<br>• `calibration_curve_*.png` | [`08_.../results/`](08_calibration_recalibration/results/)<br>• Brier & ECE metric tables<br>• Recalibration checkpoints |
+| **09. Explanation Stability** | [`explanation_stability_colab.ipynb`](09_explanation_stability/explanation_stability_colab.ipynb) | [`09_.../figures/`](09_explanation_stability/figures/)<br>• `fig07_explanation_reliability_gap.png`<br>• `supp_protocol_explanation_instability_heatmap.png` | [`09_.../results/`](09_explanation_stability/results/)<br>• `table06_explanation_reliability_gap.csv`<br>• Feature ranking summaries |
+| **10. Unified Audit Profile** | [`14_lcorf_bootstrap_alert_profile_colab.ipynb`](10_framework_formalization/14_lcorf_bootstrap_alert_profile_colab.ipynb) | [`10_.../figures/`](10_framework_formalization/figures/)<br>• `fig02_lcorf_final_audit_profile_heatmap.png`<br>• `fig06_alert_budget_precision_by_axis_dataset.png` | [`10_.../results/`](10_framework_formalization/results/)<br>• `lcorf_final_audit_profile.csv`<br>• `alert_budget_summary.csv`<br>• `paired_bootstrap_delta_summary.csv` |
 
 ---
 
 ## 📈 Key Empirical Findings
 
 Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 paired bootstrap iterations**:
-
-<div align="center">
-
-### 💥 High-Impact Operational Revelations
-
-</div>
 
 ```
  ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -101,17 +89,17 @@ Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 paired 
  │    under base-rate shifts, exposing high vulnerability in production volume shifts.            │
  ├─────────────────────────────────────────────────────────────────────────────────────────────────┤
  │ 🔍 The Explanation Reliability Gap                                                             │
- │    Top feature importance rankings remained superficially stable (Spearman rho > 0.90)          │
+ │    Top feature importance rankings remained highly correlated (Spearman rho > 0.90)          │
  │    even when models suffered severe predictive collapse, proving XAI stability does not         │
  │    guarantee model reliability.                                                                 │
  └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 <details>
-<summary><b>🔍 Click to view representative 1,000-replicate bootstrap findings table</b></summary>
+<summary><b>🔍 Click to view representative paired bootstrap audit findings (1,000 replicates)</b></summary>
 <br>
 
-| Axis | Dataset | Model | Metric | Reference | Perturbed | Mean Delta ($\bar{\Delta}$) | Median 95% Bootstrap CI | Outcome |
+| Audit Axis | Dataset | Model | Metric | Reference | Perturbed | Mean Delta ($\bar{\Delta}$) | Median 95% Bootstrap CI | Outcome |
 | :--- | :--- | :--- | :--- | :--- | :--- | :---: | :---: | :---: |
 | **Leakage** | D2\_fraudTest | XGBoost | MCC | `SAFE_STRICT` | `UNSAFE_SMOTE` | **+0.472** | [0.459, 0.483] | 🔴 **Fragile** (5/5 seeds) |
 | **Leakage** | D2\_fraudTest | LightGBM | MCC | `SAFE_STRICT` | `UNSAFE_SMOTE` | **+0.361** | [0.376, 0.406] | 🔴 **Fragile** (5/5 seeds) |
@@ -130,108 +118,109 @@ Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 paired 
 
 ## 🗃️ Datasets & Governance
 
-LC-ORF audits three widely recognized financial fraud benchmarks:
+LC-ORF evaluates three widely recognized financial fraud benchmarks under leakage-safe feature governance:
 
-| ID | Dataset | Domain | Raw Records | Frauds | Cleaned Records | Feature Governance Highlights |
+| ID | Dataset | Domain | Raw Records | Frauds | Cleaned Records | Feature Governance Protocol |
 | :---: | :--- | :--- | :---: | :---: | :---: | :--- |
 | **D1** | [ULB Credit Card](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) | European card payments | 284,807 | 492 (0.17%) | **283,726** | Removed 1,081 duplicate transactions |
 | **D2** | [Fraud Detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) | Merchant transactions | 555,719 | 2,145 (0.39%) | **555,719** | Stripped index artifact `Unnamed: 0` and ID `trans_num` |
 | **D3** | [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1) | Mobile payments | 5,840,046 | 4,497 (0.08%) | **5,840,046** | Isolated post-transaction ledger balances (`newbalance*`) |
 
 > [!NOTE]
-> **Data Download Policy:** In accordance with academic open-source repository practices, large raw CSV datasets (~800 MB uncompressed) are not committed to git.
-> Download the datasets from Kaggle using the links above and place the CSV files (`creditcard.csv`, `fraudTest.csv`, `PS.csv`) directly in `00_source_datasets/`. See [00_source_datasets/README.md](00_source_datasets/README.md) and [00_source_datasets_notes/DATASET_ACCESS_NOTE.md](00_source_datasets_notes/DATASET_ACCESS_NOTE.md).
+> **Data Access Policy:** Raw CSV files (~800 MB uncompressed) are excluded from the repository.
+> To run experiments requiring raw data, download the CSV files (`creditcard.csv`, `fraudTest.csv`, `PS.csv`) using the Kaggle links above and place them into [00_source_datasets/](00_source_datasets/). Detailed checksums and verification notes are documented in [00_source_datasets/DATASET_ACCESS_NOTE.md](00_source_datasets/DATASET_ACCESS_NOTE.md).
 
 ---
 
-## 💻 Notebook Suite & Quickstart
+## 🚀 Quickstart Guide
 
-### 🚀 1. Google Colab (One-Click GPU Execution)
-
-All experiments are organized into standalone notebooks with automated Google Drive checkpointing:
-
-| Milestone / Audit Axis | Colab Notebook | Focus & Deliverable |
-| :--- | :---: | :--- |
-| **03. Leakage Stress Testing** | [`leakage_stress_multiseed_colab.ipynb`](03_leakage_stress_testing/leakage_stress_multiseed_colab.ipynb) | 5-seed safe vs. unsafe SMOTE & ledger leakage audit |
-| **06. Temporal Robustness** | [`temporal_robustness_colab.ipynb`](06_temporal_robustness/temporal_robustness_colab.ipynb) | Chronological vs. random split drift evaluation |
-| **07. Prevalence Sensitivity** | [`prevalence_stress_colab.ipynb`](07_prevalence_stress_test/prevalence_stress_colab.ipynb) | Multi-tier deterministic base-rate downsampling |
-| **08. Calibration Analysis** | [`calibration_recalibration_colab.ipynb`](08_calibration_recalibration/calibration_recalibration_colab.ipynb) | ECE, Brier score, Platt scaling, and Isotonic regression |
-| **09. Explanation Stability** | [`explanation_stability_colab.ipynb`](09_explanation_stability/explanation_stability_colab.ipynb) | Tree SHAP feature rank stability across splits |
-| **10. Bootstrap & Alert Profiling** | [`14_lcorf_bootstrap_alert_profile_colab.ipynb`](10_framework_formalization/notebooks/14_lcorf_bootstrap_alert_profile_colab.ipynb) | 1,000 paired bootstrap confidence intervals |
-
-### 🛠️ 2. Local Environment Setup
+### 1. Local Environment Setup
 
 ```bash
-# 1. Clone repository
+# Clone repository
 git clone https://github.com/Hasnain006-nain/lc-orf-financial-fraud-robustness.git
 cd lc-orf-financial-fraud-robustness
 
-# 2. Create virtual environment
+# Set up virtual environment
 python -m venv venv
 
-# 3. Activate environment
+# Activate environment
 # On Linux / macOS:
 source venv/bin/activate
 # On Windows (PowerShell):
 .\venv\Scripts\Activate.ps1
 
-# 4. Install dependencies
+# Install requirements
 pip install -r requirements.txt
 ```
 
+### 2. Google Colab GPU Execution
+
+All notebooks in `03_...`, `06_...`, `07_...`, `08_...`, `09_...`, and `10_...` are configured for **Google Colab (T4 GPU runtime)**:
+* Automated Google Drive mounting preserves checkpoint CSVs and high-resolution figures.
+* Resumable execution: if disconnected, rerunning the notebook automatically detects completed seeds and skips recomputation.
+
 ---
 
-## 📁 Repository Organization
+## 📁 Repository Structure
 
 ```
 lc-orf-financial-fraud-robustness/
-├── assets/                                 # Visual architecture assets (Figure 1)
+├── assets/                                 # Figure 1 workflow asset
 │   └── fig01_lcorf_framework_workflow.png
-├── 00_source_datasets/                     # Local drop folder for raw Kaggle CSVs
-├── 00_source_datasets_notes/               # Integrity hashes and verification notes
-├── 01_dataset_truth_audit/                 # Duplicate checks, data truth audits
-├── 02_feature_governance/                  # Column-by-column governance rules
-├── 03_leakage_stress_testing/              # Leakage stress notebooks & checkpoints
-├── 06_temporal_robustness/                 # Chronological evaluation notebooks & data
-├── 07_prevalence_stress_test/              # Base-rate shift profiles and analysis
-├── 08_calibration_recalibration/           # Probability calibration and cost evaluations
-├── 09_explanation_stability/               # XAI attribution stability analysis
-├── 10_framework_formalization/             # Methodology formalization, bootstrap notebooks
-├── 12_github_reproducibility/              # Setup guides & execution pipelines
-├── 13_evaluation_artifacts/                # 600-DPI publication figures & result tables
-│   ├── 01_core_figures_and_tables/         # Primary benchmark heatmaps and summaries
-│   └── 02_extended_results_and_data/       # Full bootstrap result CSVs and manifests
-├── requirements.txt                        # Core Python dependencies
+├── 00_source_datasets/                     # Dataset drop directory & access notes
+│   ├── README.md                           # Download instructions & URLs
+│   └── DATASET_ACCESS_NOTE.md              # Checksums, sizes, and row counts
+├── 01_dataset_truth_audit/                 # Duplicate checks & ground-truth audit
+│   ├── dataset_audit_summary.csv           # Summary statistics
+│   ├── supplemental_risk_findings.csv      # Risk & column classifications
+│   └── dataset_truth_audit.md              # Detailed audit report
+├── 02_feature_governance/                  # Column-level feature governance
+│   ├── feature_governance_table.csv        # Column exclusion rules
+│   ├── feature_set_definitions.csv         # Strict vs. stress feature sets
+│   └── feature_governance_table.md         # Formal governance criteria
+├── 03_leakage_stress_testing/              # Axis 1: Leakage stress testing
+│   ├── leakage_stress_multiseed_colab.ipynb# 5-seed Colab notebook
+│   ├── figures/                            # 600-DPI heatmaps & cost charts
+│   ├── results/                            # Metrics & seed checkpoints
+│   └── README.md                           # Axis documentation
+├── 06_temporal_robustness/                 # Axis 2: Temporal robustness
+│   ├── temporal_robustness_colab.ipynb     # Chronological evaluation notebook
+│   ├── figures/                            # Drift & AP degradation plots
+│   ├── results/                            # Drift diagnostics & metrics
+│   └── README.md                           # Axis documentation
+├── 07_prevalence_stress_test/              # Axis 3: Prevalence stress testing
+│   ├── prevalence_stress_colab.ipynb       # Base-rate shift notebook
+│   ├── figures/                            # Prevalence sensitivity heatmaps
+│   ├── results/                            # Fragility component tables
+│   └── README.md                           # Axis documentation
+├── 08_calibration_recalibration/           # Axis 4: Calibration & recalibration
+│   ├── calibration_recalibration_colab.ipynb# Brier score & ECE notebook
+│   ├── figures/                            # Calibration curves & error plots
+│   ├── results/                            # Calibration metrics & checkpoints
+│   └── README.md                           # Axis documentation
+├── 09_explanation_stability/               # Axis 5: Explanation stability (XAI)
+│   ├── explanation_stability_colab.ipynb   # Tree SHAP rank stability notebook
+│   ├── figures/                            # Explanation reliability gap plots
+│   ├── results/                            # Spearman rank correlation tables
+│   └── README.md                           # Axis documentation
+├── 10_framework_formalization/             # Axis 6: Unified audit & alert budgeting
+│   ├── 14_lcorf_bootstrap_alert_profile_colab.ipynb # 1,000-bootstrap notebook
+│   ├── figures/                            # Final multi-axis audit heatmaps
+│   ├── results/                            # Consolidated profiles & budgets
+│   └── README.md                           # Module documentation
+├── requirements.txt                        # Environment dependencies
 ├── LICENSE                                 # MIT License
-└── README.md                               # Framework documentation
+└── README.md                               # Repository documentation
 ```
-
----
-
-## 🎯 Traceability to Benchmark Artifacts
-
-All reported metrics are directly traceable to saved CSV artifacts in [13_evaluation_artifacts/](13_evaluation_artifacts/):
-
-| Benchmark Item | Content Description | Source Result Artifact |
-| :--- | :--- | :--- |
-| **Figure 1** | LC-ORF 5-Stage Framework Workflow | [`assets/fig01_lcorf_framework_workflow.png`](assets/fig01_lcorf_framework_workflow.png) |
-| **Figure 2** | Final Multi-Axis Audit Profile Heatmap | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig02_*.png` |
-| **Figure 3** | Multi-Seed AP Leakage Inflation Heatmap | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig03_*.png` |
-| **Figure 4** | D2 Feature Drift vs. Temporal AP Drop | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig04_*.png` |
-| **Figure 5** | Prevalence Profile Sensitivity Heatmap | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig05_*.png` |
-| **Figure 6** | Alert Budget Precision by Axis & Dataset | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig06_*.png` |
-| **Figure 7** | Explanation Reliability Gap Visualization | `13_evaluation_artifacts/01_core_figures_and_tables/figures/png/fig07_*.png` |
-| **Audit Profile** | 1,000-Replicate Paired Bootstrap Deltas | `13_evaluation_artifacts/02_extended_results_and_data/tables/source_results/lcorf_final_audit_profile.csv` |
 
 ---
 
 ## ⚖️ Responsible Research Claim Boundaries
 
-To ensure scientific transparency, the LC-ORF research framework establishes explicit claim boundaries:
-
 * 🚫 **No Classifier SOTA Claims:** We do not claim LightGBM or XGBoost are superior classifiers. Our contribution is the **operational audit framework**.
 * 🚫 **No Universal Drift Claims:** Measured temporal drops reflect the tested benchmark protocol, not universal bank transaction dynamics.
-* 🚫 **No Causal XAI Claims:** The *Explanation Reliability Gap* measures rank divergence; it does not validate causal explanations.
+* 🚫 **No Causal XAI Claims:** The *Explanation Reliability Gap* measures empirical rank divergence; it does not validate causal explanations.
 * ✅ **Unbiased Reporting:** Robust, Fragile, and Inconclusive outcomes are reported with equal scientific weight.
 
 ---
@@ -241,11 +230,10 @@ To ensure scientific transparency, the LC-ORF research framework establishes exp
 If you utilize this framework, evaluation suite, or audit methodology in your research, please cite:
 
 ```bibtex
-@article{lcorf2026robustness,
+@article{haider2026lcorf,
   title={{LC-ORF: A Leakage-Controlled Operational Robustness Framework for Financial Fraud Detection}},
   author={Haider, Hasnain and Mushtaq, Waseem and Abbas, Qaiser and Al Hassan, Adnan Nadeem and Alshanqiti, Abdullah and Albouq, Sami},
   year={2026},
-  journal={arXiv preprint},
   url={https://github.com/Hasnain006-nain/lc-orf-financial-fraud-robustness}
 }
 ```

@@ -1,35 +1,27 @@
-# Temporal Robustness Notebook
+# ⏳ Axis 2: Temporal Robustness
 
-Notebook: `temporal_robustness_colab.ipynb`
+This module investigates model degradation when transitioning from standard random stratified splitting to chronological sequential evaluation.
 
-Purpose:
+## 📓 Notebook
 
-- Test whether leakage-safe fraud models remain stable under chronological evaluation.
-- Compare `RANDOM_STRATIFIED_SAFE` against `CHRONOLOGICAL_SAFE`.
-- Use strict feature governance only.
-- Produce Temporal Robustness Drop tables and 600-DPI figures.
+- **`temporal_robustness_colab.ipynb`**: Evaluates temporal stability across datasets, measuring chronological performance drops and feature distribution drift.
 
-Expected Colab T4 runtime:
+## 📂 Folder Contents
 
-- About 50-90 minutes for the full five-seed run.
-- If Google Drive is slow, allow up to 2 hours.
+- **`figures/`**: Generated high-resolution figures (PNG at 600 DPI and vector PDF):
+  - `fig04_d2_drift_vs_temporal_drop.png` / `.pdf`: Primary visualization connecting D2 feature drift with chronological performance drop.
+  - `temporal_ap_drop_heatmap.png` / `.pdf`: Cross-dataset AP degradation heatmap.
+  - `temporal_ap_drop_by_dataset.png`: AP reduction across datasets.
+  - `temporal_cost_delta_by_dataset.png`: Financial operating cost impacts.
+  - `temporal_mcc_drop_by_dataset.png`: MCC performance degradation.
+- **`results/`**: Output data and diagnostics:
+  - `d2_temporal_drift_diagnostics.csv`: Population stability index (PSI) and Wasserstein feature drift metrics.
+  - `d2_temporal_drop_summary.csv`: Summary of performance drop under chronological testing.
+  - `d2_temporal_prevalence_by_split.csv`: Base-rate variations across temporal partitions.
+  - `temporal_robustness_results.csv`: Complete evaluation run results.
+  - `checkpoints/`: Seed-level evaluation checkpoint CSVs.
 
-Outputs:
+## 🎯 Key Findings
 
-- `results/temporal_robustness_results.csv`
-- `results/temporal_robustness_index.csv`
-- `results/temporal_robustness_summary.csv`
-- 600-DPI PNG/PDF figures under `figures/`
-- `run_summary.json`
-- `logs/run.log`
-
-Resume behavior:
-
-- Rerun from the top after disconnect.
-- Existing checkpoint CSVs are skipped.
-
-Paper interpretation:
-
-- Negative `trd_average_precision` or `trd_mcc` means chronological testing is harder than random split testing.
-- D1 uses anonymized elapsed transaction time, so report it as pseudo-temporal/order robustness.
-- D2 and D3 use source transaction/order time fields.
+- **Chronological Degradation:** On D2, moving to chronological evaluation reduced Average Precision by **-0.277** for XGBoost and **-0.245** for LightGBM.
+- **Hidden Drift:** Random stratified splits hide significant temporal feature drift that surfaces immediately in chronological validation.

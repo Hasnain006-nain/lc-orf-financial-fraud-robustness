@@ -1,35 +1,22 @@
-# Calibration and Recalibration Notebook
+# 🎯 Axis 4: Calibration & Recalibration
 
-Notebook: `calibration_recalibration_colab.ipynb`
+This module audits probability score reliability using calibration metrics and post-hoc recalibration techniques (Platt Scaling and Isotonic Regression).
 
-Purpose:
+## 📓 Notebook
 
-- Test probability calibration quality for strict fraud-detection models.
-- Compare raw probabilities against validation-set Platt sigmoid and isotonic recalibration.
-- Report Brier score, Expected Calibration Error, maximum calibration error, log loss, cost, MCC, and calibration curves.
+- **`calibration_recalibration_colab.ipynb`**: Evaluates probability calibration, Expected Calibration Error (ECE), Brier score, and expected operating costs.
 
-Expected Colab T4 runtime:
+## 📂 Folder Contents
 
-- About 35-75 minutes for the full five-seed run.
-- If Google Drive is slow, allow up to 90 minutes.
+- **`figures/`**: Generated figures (PNG at 600 DPI and vector PDF):
+  - `supp_calibration_brier_reduction_by_dataset.png` / `.pdf`: Brier score improvements via recalibration.
+  - `supp_calibration_ece_reduction_by_dataset.png` / `.pdf`: ECE reduction across datasets.
+  - `calibration_curve_D1.png`, `calibration_curve_D2.png`, `calibration_curve_D3.png`: Reliability diagrams before and after recalibration.
+  - `calibration_cost_delta_by_dataset.png`: Operating cost variations.
+- **`results/`**: Output data:
+  - Metric CSVs with raw vs. recalibrated Brier score and ECE.
+  - `checkpoints/`: Seed-level calibration checkpoint CSVs.
 
-Outputs:
+## 🎯 Key Findings
 
-- `results/calibration_recalibration_results.csv`
-- `results/calibration_improvement_index.csv`
-- `results/calibration_recalibration_summary.csv`
-- `results/calibration_curve_bins.csv`
-- 600-DPI PNG/PDF figures under `figures/`
-- `run_summary.json`
-- `logs/run.log`
-
-Resume behavior:
-
-- Rerun from the top after disconnect.
-- Existing seed/dataset/model checkpoint CSVs are skipped.
-
-Paper interpretation:
-
-- Positive Brier/ECE/log-loss reduction means recalibration improved probability quality.
-- Cost delta can be positive or negative because recalibration changes thresholded operating behavior.
-- Calibration is a separate claim from ranking performance; AP and ROC-AUC may not improve.
+- **Calibration vs. Cost Decoupling:** While post-hoc recalibration substantially reduced ECE and Brier score, it did not automatically reduce operating cost without deliberate decision threshold realignment.
