@@ -1,0 +1,73 @@
+# ==========================================
+# LC-ORF .gitignore Specification
+# ==========================================
+
+# 1. Raw Datasets (Strict Rule: Do NOT push raw datasets)
+creditcard.csv
+fraudTest.csv
+PS.csv
+PS_*.csv
+*.csv.zip
+*.csv.gz
+*.csv.tar.gz
+*.tar.gz
+*.zip
+*.parquet
+*.feather
+00_source_datasets/*.csv
+00_source_datasets/**/*.csv
+
+# 2. Temporary and Review Scratch Directories
+tmp/
+**/tmp/
+temp/
+**/temp/
+scratch/
+**/scratch/
+*.bak
+*.swp
+*.swo
+*~
+*.tmp
+
+# 3. LaTeX Auxiliary and Build Files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+
+# 4. Python and Jupyter Cache Files
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+.pytest_cache/
+.coverage
+htmlcov/
+.env
+.venv
+env/
+venv/
+ENV/
+
+# 5. OS and Editor Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.code-workspace

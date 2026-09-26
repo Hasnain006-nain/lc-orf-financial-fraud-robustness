@@ -1,0 +1,2 @@
+run_name,timestamp,seed,dataset,scenario,model,feature_policy,smoke_test,rows_used,fraud_rows_used,threshold,n_test,tp,fp,tn,fn,recall,precision,f1,mcc,average_precision,roc_auc,brier,false_alerts_per_10k,missed_frauds_per_10k,cost_per_10k,fit_seconds
+leakage_stress_multiseed_v1,2026-09-23 17:35:51,101,D3_PaySim,D3_LEDGER_STATE_SAFE,xgboost,ledger_state,False,200000,4497,0.66,40000,890,124,38977,9,0.9899888765294772,0.8777120315581854,0.9304756926293779,0.9305449335915935,0.9883383002818545,0.9996405873850155,0.0032503344344174223,31.0,2.25,256.0,0.824974775314331

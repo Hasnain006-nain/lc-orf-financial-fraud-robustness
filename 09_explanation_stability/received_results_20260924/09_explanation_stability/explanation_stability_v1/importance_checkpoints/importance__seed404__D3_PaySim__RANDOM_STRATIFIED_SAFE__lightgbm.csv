@@ -1,0 +1,5 @@
+run_name,timestamp,seed,dataset,split_policy,model,feature_policy,smoke_test,rows_used,fraud_rows_used,fit_seconds,train_n,train_fraud,raw_feature,importance,importance_normalized,rank
+explanation_stability_v1,2026-09-23 20:48:34,404,D3_PaySim,RANDOM_STRATIFIED_SAFE,lightgbm,strict,False,1000000,749,27.190880060195923,800000,599,amount,11711.0,0.3777741935483871,1
+explanation_stability_v1,2026-09-23 20:48:34,404,D3_PaySim,RANDOM_STRATIFIED_SAFE,lightgbm,strict,False,1000000,749,27.190880060195923,800000,599,oldbalanceOrg,10544.0,0.3401290322580645,2
+explanation_stability_v1,2026-09-23 20:48:34,404,D3_PaySim,RANDOM_STRATIFIED_SAFE,lightgbm,strict,False,1000000,749,27.190880060195923,800000,599,oldbalanceDest,6770.0,0.21838709677419355,3
+explanation_stability_v1,2026-09-23 20:48:34,404,D3_PaySim,RANDOM_STRATIFIED_SAFE,lightgbm,strict,False,1000000,749,27.190880060195923,800000,599,type,1975.0,0.06370967741935483,4

@@ -1,0 +1,6 @@
+feature_set,purpose,definition
+strict,Main publishable protocol.,"Only features defensibly available at scoring time, with identifiers removed and fitted preprocessing restricted to training data."
+chronology,Temporal robustness evaluation.,Uses source time fields for ordering train/validation/test windows. Raw time fields are not automatically model inputs.
+operational,Context-rich but still plausible deployment setting.,Allows carefully encoded merchant/job/location fields when available at scoring time; requires min-frequency grouping and explicit reporting.
+ledger_state,D3 leakage/availability stress test.,Compares strict pre-transaction features with post-transaction balance fields to quantify possible inflation.
+strict_sensitive,Fairness/sensitivity transparency.,"Demographic or proxy variables are reported and tested with ablation, not silently mixed into the main result."

@@ -1,0 +1,41 @@
+{
+  "run_name": "prevalence_stress_v1",
+  "completed_at": "2026-09-23 19:37:10",
+  "project_root": "/content/drive/MyDrive/Credit__",
+  "experiment_root": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1",
+  "seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "models": [
+    "xgboost",
+    "lightgbm"
+  ],
+  "target_prevalences": [
+    0.0005,
+    0.001,
+    0.002,
+    0.005,
+    0.01
+  ],
+  "prevalence_repeats": 5,
+  "max_eval_rows_per_prevalence": 100000,
+  "min_frauds_per_eval": 20,
+  "caps": {
+    "D1_creditcard": null,
+    "D2_fraudTest": null,
+    "D3_PaySim": 1000000
+  },
+  "results_file": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/results/prevalence_stress_results.csv",
+  "index_file": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/results/prevalence_sensitivity_index.csv",
+  "summary_by_prevalence_file": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/results/prevalence_stress_summary_by_prevalence.csv",
+  "sensitivity_summary_file": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/results/prevalence_sensitivity_summary.csv",
+  "figures_dir": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/figures",
+  "checkpoint_dir": "/content/drive/MyDrive/Credit__/07_prevalence_stress_test/prevalence_stress_v1/checkpoints",
+  "n_result_rows": 780,
+  "n_index_rows": 780,
+  "n_sensitivity_rows": 6
+}

@@ -1,0 +1,10 @@
+metric,material_threshold,interpretation_note
+average_precision,0.020,"A bootstrap interval entirely beyond +/-0.020 is treated as a material AP change."
+mcc,0.050,"A bootstrap interval entirely beyond +/-0.050 is treated as a material MCC change."
+precision,0.050,"A bootstrap interval entirely beyond +/-0.050 is treated as a material precision change."
+recall,0.050,"A bootstrap interval entirely beyond +/-0.050 is treated as a material recall change."
+brier,0.005,"A bootstrap interval entirely beyond +/-0.005 is treated as a material Brier-score change. Lower Brier is better."
+ece,0.020,"A bootstrap interval entirely beyond +/-0.020 is treated as a material ECE change. Lower ECE is better."
+cost_per_10k,"max(100, 0.10 * abs(reference_cost_per_10k))","A cost change is material if the bootstrap interval is entirely beyond this adaptive cost threshold. Lower cost is better."
+explanation_instability_index,0.200,"EII >= 0.200 is treated as explanation-rank instability."
+explanation_reliability_gap,1.000,"ERG > 1.000 indicates predictive shift exceeds explanation-rank instability by at least one AP materiality unit."

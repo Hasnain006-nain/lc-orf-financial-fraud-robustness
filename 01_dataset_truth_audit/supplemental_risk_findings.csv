@@ -1,0 +1,14 @@
+dataset,check,value,note
+D1_creditcard,duplicate_rows_total,1081,Rows duplicated after first occurrence
+D1_creditcard,duplicate_fraud_rows,19,Fraud rows removed if duplicates are dropped with keep=first
+D1_creditcard,post_dedup_rows,283726,Matches manuscript cleaned row count if duplicate rows removed
+D1_creditcard,post_dedup_fraud_rows,473,Matches manuscript cleaned fraud count if duplicate rows removed
+D2_fraudTest,unnamed_0_unique,555719,Index-like column; should be removed before modeling
+D2_fraudTest,trans_num_unique,555719,Transaction identifier; should be removed before modeling
+D2_fraudTest,cc_num_unique,924,Customer/card identifier; high leakage/generalization risk if used naively
+D2_fraudTest,merchant_unique,693,High-cardinality merchant; can be retained only with careful encoding/min frequency
+D2_fraudTest,date_range,2020-06-21 12:14:25 to 2020-12-31 23:59:34,Temporal split should use this or unix_time
+D3_PaySim,rows_with_any_missing,1,Inspect output D3_rows_with_missing_values.csv
+D3_PaySim,isFraud_unknown_rows,1,Unknown label row must be removed or repaired before modeling
+D3_PaySim,isFlaggedFraud_positive_count,4,Rule-based flag; should not be used as model input
+D3_PaySim,step_range,1 to 402,Temporal split should use step

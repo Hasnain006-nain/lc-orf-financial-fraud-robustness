@@ -1,0 +1,19 @@
+{
+  "completed_at": "2026-09-25T16:48:09",
+  "project_root": "/content/drive/MyDrive/Credit__",
+  "n_prediction_files": 300,
+  "n_comparisons": 150,
+  "n_bootstrap": 1000,
+  "max_bootstrap_rows_per_class": null,
+  "bootstrap_per_seed_file": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/paired_bootstrap_delta_per_seed.csv",
+  "bootstrap_summary_file": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/paired_bootstrap_delta_summary.csv",
+  "alert_budget_per_seed_file": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/alert_budget_per_seed.csv",
+  "alert_budget_summary_file": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/alert_budget_summary.csv",
+  "audit_profile_file": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/lcorf_audit_profile.csv",
+  "figures_dir": "/content/drive/MyDrive/Credit__/10_framework_formalization/figures",
+  "bootstrap_modes": [
+    "paired",
+    "stratified_unpaired"
+  ],
+  "min_bootstrap_replicates": 1000
+}

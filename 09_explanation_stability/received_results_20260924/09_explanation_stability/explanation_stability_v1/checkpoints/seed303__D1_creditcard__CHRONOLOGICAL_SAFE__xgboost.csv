@@ -1,0 +1,2 @@
+run_name,timestamp,seed,dataset,split_policy,model,feature_policy,smoke_test,rows_used,fraud_rows_used,fit_seconds,train_n,train_fraud,n_test,test_fraud,test_prevalence,average_precision,roc_auc,mcc_at_050
+explanation_stability_v1,2026-09-23 20:40:27,303,D1_creditcard,CHRONOLOGICAL_SAFE,xgboost,strict,False,283726,473,2.137843608856201,226980,399,56746,74,0.0013040566735981391,0.7962594104634492,0.987326312054573,0.8072161804215322

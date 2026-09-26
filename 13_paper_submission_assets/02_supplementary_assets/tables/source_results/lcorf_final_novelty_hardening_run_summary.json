@@ -1,0 +1,9 @@
+{
+  "completed_at": "2026-09-25T18:51:04",
+  "prevalence_profile_component": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/prevalence_profile_component.csv",
+  "d2_temporal_drift_diagnostics": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/d2_temporal_drift_diagnostics.csv",
+  "explanation_reliability_gap": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/explanation_reliability_gap.csv",
+  "final_audit_profile": "/content/drive/MyDrive/Credit__/10_framework_formalization/results/lcorf_final_audit_profile.csv",
+  "figures_dir": "/content/drive/MyDrive/Credit__/10_framework_formalization/figures",
+  "final_profile_rows": 252
+}

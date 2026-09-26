@@ -1,0 +1,7 @@
+axis,changed_assumption,main_evidence,claim_boundary
+leakage,unsafe preprocessing or ledger-state access,"paired_bootstrap_delta_summary.csv, multiseed_ap_leakage_inflation_heatmap",Shows sensitivity to protocol leakage; not a new fraud classifier.
+temporal,random split versus chronological evaluation,"d2_temporal_drift_diagnostics.csv, d2_drift_vs_temporal_drop",Shows temporal degradation under this benchmark protocol; not proof of deployment drift in all banks.
+prevalence,fraud-rate composition in the evaluation stream,"prevalence_profile_component.csv, prevalence_profile_heatmap",Shows metric and alert sensitivity to base-rate shift; not prevalence-invariant modeling.
+calibration,raw scores versus Platt or isotonic recalibration,paired_bootstrap_delta_summary.csv,Calibration affects probabilities and operating costs; it is not always a classifier improvement.
+explanation_protocol,random explanation protocol versus chronological protocol,"paired_bootstrap_delta_summary.csv, explanation_reliability_gap.csv","Explanation reliability gap is an operational proxy, not causal explanation validation."
+alert_budget,fixed alert capacity and score thresholds,"alert_budget_summary.csv, alert_budget_precision_by_axis_dataset",Reports alert workload behavior under chosen budgets; not an optimized fraud operations policy.

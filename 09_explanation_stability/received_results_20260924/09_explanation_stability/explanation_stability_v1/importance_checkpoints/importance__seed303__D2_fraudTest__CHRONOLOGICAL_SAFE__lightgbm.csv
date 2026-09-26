@@ -1,0 +1,9 @@
+run_name,timestamp,seed,dataset,split_policy,model,feature_policy,smoke_test,rows_used,fraud_rows_used,fit_seconds,train_n,train_fraud,raw_feature,importance,importance_normalized,rank
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,age_years,5760.0,0.18580645161290324,1
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,state,5711.0,0.1842258064516129,2
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,amt,4773.0,0.15396774193548388,3
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,category,4252.0,0.13716129032258065,4
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,city_pop,4246.0,0.13696774193548386,5
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,trans_hour,2348.0,0.07574193548387097,6
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,trans_month,2316.0,0.07470967741935484,7
+explanation_stability_v1,2026-09-23 20:42:13,303,D2_fraudTest,CHRONOLOGICAL_SAFE,lightgbm,strict,False,555719,2145,19.489316940307617,444575,1961,trans_dayofweek,1594.0,0.05141935483870968,8

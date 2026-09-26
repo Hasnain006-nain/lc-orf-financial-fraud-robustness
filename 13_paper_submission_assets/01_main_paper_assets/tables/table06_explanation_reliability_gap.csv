@@ -1,0 +1,7 @@
+dataset,model,top5_jaccard_mean,eii_mean,protocol_ap_delta_mean,protocol_mcc_delta_mean,explanation_reliability_gap,gap_interpretation
+D1_creditcard,lightgbm,0.4761904761904761,0.5238095238095237,-0.0273516491227111,-0.0325534953610934,0.8437729323260312,explanation_rank_instability_detected
+D1_creditcard,xgboost,0.7523809523809524,0.2476190476190475,-0.0455872263601729,-0.0383853856314426,2.0317422703895973,predictive_shift_exceeds_rank_instability
+D2_fraudTest,lightgbm,1.0,0.0,-0.2168199204622753,-0.1562416089287051,10.840996023113766,predictive_shift_exceeds_rank_instability
+D2_fraudTest,xgboost,1.0,0.0,-0.2331705652174499,-0.0573043294025794,11.658528260872494,predictive_shift_exceeds_rank_instability
+D3_PaySim,lightgbm,1.0,0.0,-0.0047891079039191,-0.0193634705507405,0.239455395195955,predictive_shift_not_material
+D3_PaySim,xgboost,1.0,0.0,-0.0063749411990923,-0.0186529299957537,0.318747059954615,predictive_shift_not_material

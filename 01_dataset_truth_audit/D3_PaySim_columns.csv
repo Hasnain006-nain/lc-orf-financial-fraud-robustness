@@ -1,0 +1,12 @@
+column,dtype,missing,missing_pct,unique,unique_pct,role_hint
+step,int64,0,0.0,402,0.006884,time/date
+type,str,0,0.0,5,8.6e-05,
+amount,float64,0,0.0,4949253,84.746815,
+nameOrig,str,0,0.0,5832177,99.865258,identifier/high-cardinality-review
+oldbalanceOrg,float64,0,0.0,1710764,29.293673,leakage-review
+newbalanceOrig,float64,0,0.0,2456931,42.070405,leakage-review
+nameDest,str,0,0.0,2488228,42.606308,identifier/high-cardinality-review
+oldbalanceDest,float64,0,0.0,3332144,57.056811,leakage-review
+newbalanceDest,float64,0,0.0,3250905,55.665743,leakage-review
+isFraud,float64,1,1.7e-05,2,3.4e-05,label
+isFlaggedFraud,float64,1,1.7e-05,2,3.4e-05,leakage-review

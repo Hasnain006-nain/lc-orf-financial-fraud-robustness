@@ -1,0 +1,7 @@
+audit_axis,rows,datasets,models,complete_evidence_rows,proxy_evidence_rows,rows_with_fragile_count
+calibration,84,3,2,84,0,22
+explanation_protocol,42,3,2,42,0,7
+explanation_reliability_gap,6,3,2,0,6,0
+leakage,42,3,2,42,0,22
+prevalence,36,3,2,36,0,29
+temporal,42,3,2,42,0,10

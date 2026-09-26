@@ -1,0 +1,2 @@
+run_name,timestamp,seed,dataset,split_policy,model,feature_policy,smoke_test,rows_used,fraud_rows_used,fit_seconds,train_n,train_fraud,n_test,test_fraud,test_prevalence,average_precision,roc_auc,mcc_at_050
+explanation_stability_v1,2026-09-23 20:41:06,303,D2_fraudTest,RANDOM_STRATIFIED_SAFE,xgboost,strict,False,555719,2145,1.5989205837249756,444575,1716,111144,429,0.003859857482185273,0.9066689301605673,0.9964925378554967,0.5387604376817833

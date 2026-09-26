@@ -1,0 +1,2 @@
+run_name,timestamp,seed,dataset,scenario,model,feature_policy,smoke_test,rows_used,fraud_rows_used,threshold,n_test,tp,fp,tn,fn,recall,precision,f1,mcc,average_precision,roc_auc,brier,false_alerts_per_10k,missed_frauds_per_10k,cost_per_10k,fit_seconds
+leakage_stress_multiseed_v1,2026-09-23 17:35:32,101,D3_PaySim,D3_STRICT_SAFE,lightgbm,strict,False,200000,4497,0.03,40000,896,557,38544,3,0.996662958843159,0.616655196145905,0.7619047619047619,0.7782908079658037,0.9685924072363367,0.999220381295421,0.00435172169665756,139.25,0.7499999999999999,214.25,6.6150221824646

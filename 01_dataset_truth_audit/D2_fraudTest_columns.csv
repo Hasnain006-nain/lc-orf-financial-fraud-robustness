@@ -1,0 +1,24 @@
+column,dtype,missing,missing_pct,unique,unique_pct,role_hint
+Unnamed: 0,int64,0,0.0,555719,100.0,
+trans_date_trans_time,str,0,0.0,544760,98.02796,time/date
+cc_num,int64,0,0.0,924,0.166271,identifier/high-cardinality-review
+merchant,str,0,0.0,693,0.124703,identifier/high-cardinality-review
+category,str,0,0.0,14,0.002519,
+amt,float64,0,0.0,37256,6.704108,
+first,str,0,0.0,341,0.061362,identifier/high-cardinality-review
+last,str,0,0.0,471,0.084755,identifier/high-cardinality-review
+gender,str,0,0.0,2,0.00036,
+street,str,0,0.0,924,0.166271,identifier/high-cardinality-review
+city,str,0,0.0,849,0.152775,
+state,str,0,0.0,50,0.008997,
+zip,int64,0,0.0,912,0.164112,identifier/high-cardinality-review
+lat,float64,0,0.0,910,0.163752,identifier/high-cardinality-review
+long,float64,0,0.0,910,0.163752,identifier/high-cardinality-review
+city_pop,int64,0,0.0,835,0.150256,
+job,str,0,0.0,478,0.086015,
+dob,str,0,0.0,910,0.163752,time/date
+trans_num,str,0,0.0,555719,100.0,identifier/high-cardinality-review
+unix_time,int64,0,0.0,544760,98.02796,time/date
+merch_lat,float64,0,0.0,546490,98.339269,identifier/high-cardinality-review
+merch_long,float64,0,0.0,551770,99.289389,identifier/high-cardinality-review
+is_fraud,int64,0,0.0,2,0.00036,label
