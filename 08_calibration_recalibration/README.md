@@ -8,11 +8,11 @@ This module audits probability score reliability using calibration metrics and p
 
 ## 📂 Folder Contents
 
-- **`figures/`**: Generated figures (PNG at 600 DPI and vector PDF):
-  - `supp_calibration_brier_reduction_by_dataset.png` / `.pdf`: Brier score improvements via recalibration.
-  - `supp_calibration_ece_reduction_by_dataset.png` / `.pdf`: ECE reduction across datasets.
-  - `calibration_curve_D1.png`, `calibration_curve_D2.png`, `calibration_curve_D3.png`: Reliability diagrams before and after recalibration.
-  - `calibration_cost_delta_by_dataset.png`: Operating cost variations.
+- **`figures/`**: Generated publication-quality vector PDF figures:
+  - `supp_calibration_brier_reduction_by_dataset.pdf`: Brier score improvements via recalibration.
+  - `supp_calibration_ece_reduction_by_dataset.pdf`: ECE reduction across datasets.
+  - `calibration_curve_D1.pdf`, `calibration_curve_D2.pdf`, `calibration_curve_D3.pdf`: Reliability diagrams before and after recalibration.
+  - `calibration_cost_delta_by_dataset.pdf`: Operating cost variations.
 - **`results/`**: Output data:
   - Metric CSVs with raw vs. recalibrated Brier score and ECE.
   - `checkpoints/`: Seed-level calibration checkpoint CSVs.

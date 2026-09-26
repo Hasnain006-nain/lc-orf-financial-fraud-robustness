@@ -8,11 +8,14 @@ This module evaluates model sensitivity to non-stationary fraud base rates using
 
 ## 📂 Folder Contents
 
-- **`figures/`**: Generated figures (PNG at 600 DPI and vector PDF):
-  - `fig05_prevalence_profile_heatmap.png` / `.pdf`: Primary audit heatmap across prevalence shift conditions.
-  - `supp_prevalence_precision_curve.png` / `.pdf`: Precision decay curves across downsampled base rates.
-  - `prevalence_cost_sensitivity_heatmap.png`: Operating cost variations under base-rate shifts.
-  - `prevalence_mcc_curve.png`: MCC stability curves.
+- **`figures/`**: Generated publication-quality vector PDF figures:
+  - `fig05_prevalence_profile_heatmap.pdf`: Primary audit heatmap across prevalence shift conditions.
+  - `supp_prevalence_precision_curve.pdf`: Precision decay curves across downsampled base rates.
+  - `supp_prevalence_profile_heatmap.pdf`: Full prevalence profile heatmap.
+  - `prevalence_cost_sensitivity_heatmap.pdf`: Operating cost variations under base-rate shifts.
+  - `prevalence_cost_curve.pdf`: Financial loss curve.
+  - `prevalence_mcc_curve.pdf`: MCC stability curves.
+  - `prevalence_precision_curve.pdf`: Alert precision curves.
 - **`results/`**: Output data:
   - `table08_prevalence_profile_component.csv`: Component-by-component fragility labels.
   - `prevalence_profile_per_target.csv`: Per-target prevalence performance records.

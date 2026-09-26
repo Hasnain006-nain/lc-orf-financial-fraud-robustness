@@ -8,12 +8,12 @@ This module investigates model degradation when transitioning from standard rand
 
 ## 📂 Folder Contents
 
-- **`figures/`**: Generated high-resolution figures (PNG at 600 DPI and vector PDF):
-  - `fig04_d2_drift_vs_temporal_drop.png` / `.pdf`: Primary visualization connecting D2 feature drift with chronological performance drop.
-  - `temporal_ap_drop_heatmap.png` / `.pdf`: Cross-dataset AP degradation heatmap.
-  - `temporal_ap_drop_by_dataset.png`: AP reduction across datasets.
-  - `temporal_cost_delta_by_dataset.png`: Financial operating cost impacts.
-  - `temporal_mcc_drop_by_dataset.png`: MCC performance degradation.
+- **`figures/`**: Generated publication-quality vector PDF figures:
+  - `fig04_d2_drift_vs_temporal_drop.pdf`: Primary visualization connecting D2 feature drift with chronological performance drop.
+  - `temporal_ap_drop_heatmap.pdf`: Cross-dataset AP degradation heatmap.
+  - `temporal_ap_drop_by_dataset.pdf`: AP reduction across datasets.
+  - `temporal_cost_delta_by_dataset.pdf`: Financial operating cost impacts.
+  - `temporal_mcc_drop_by_dataset.pdf`: MCC performance degradation.
 - **`results/`**: Output data and diagnostics:
   - `d2_temporal_drift_diagnostics.csv`: Population stability index (PSI) and Wasserstein feature drift metrics.
   - `d2_temporal_drop_summary.csv`: Summary of performance drop under chronological testing.

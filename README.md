@@ -7,6 +7,7 @@
 [![Framework](https://img.shields.io/badge/Framework-LC--ORF-10B981?style=for-the-badge&logo=shield&logoColor=white)](#-framework-architecture)
 [![Colab Ready](https://img.shields.io/badge/Google_Colab-T4_GPU_Ready-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](#-experiment-modules--notebook-suite)
 [![Audit](https://img.shields.io/badge/Bootstrap-1000_Replicates-6366F1?style=for-the-badge)](#-key-empirical-findings)
+[![Figures](https://img.shields.io/badge/Figures-Vector_PDF-EC1C24?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](#-experiment-modules--notebook-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <br/>
@@ -57,16 +58,16 @@ The LC-ORF protocol executes in **five structured stages**:
 
 ## 🔬 Experiment Modules & Notebook Suite
 
-Each experiment module is completely self-contained with its own notebook, dedicated `figures/` folder, and dedicated `results/` CSV folder:
+Each experiment module is completely self-contained with its own notebook, dedicated publication-grade vector PDF `figures/` folder, and dedicated `results/` CSV folder:
 
-| Module / Audit Axis | Notebook | Dedicated Figures | Dedicated Results & CSVs |
+| Module / Audit Axis | Notebook | Dedicated Vector PDF Figures | Dedicated Results & CSVs |
 | :--- | :--- | :--- | :--- |
-| **03. Leakage Stress Testing** | [`leakage_stress_multiseed_colab.ipynb`](03_leakage_stress_testing/leakage_stress_multiseed_colab.ipynb) | [`03_.../figures/`](03_leakage_stress_testing/figures/)<br>• `fig03_multiseed_ap_leakage_inflation_heatmap.png` | [`03_.../results/`](03_leakage_stress_testing/results/)<br>• `table03_key_bootstrap_findings.csv`<br>• Checkpoint CSVs |
-| **06. Temporal Robustness** | [`temporal_robustness_colab.ipynb`](06_temporal_robustness/temporal_robustness_colab.ipynb) | [`06_.../figures/`](06_temporal_robustness/figures/)<br>• `fig04_d2_drift_vs_temporal_drop.png`<br>• `temporal_ap_drop_heatmap.png` | [`06_.../results/`](06_temporal_robustness/results/)<br>• `d2_temporal_drift_diagnostics.csv`<br>• `d2_temporal_drop_summary.csv` |
-| **07. Prevalence Sensitivity** | [`prevalence_stress_colab.ipynb`](07_prevalence_stress_test/prevalence_stress_colab.ipynb) | [`07_.../figures/`](07_prevalence_stress_test/figures/)<br>• `fig05_prevalence_profile_heatmap.png`<br>• `supp_prevalence_precision_curve.png` | [`07_.../results/`](07_prevalence_stress_test/results/)<br>• `table08_prevalence_profile_component.csv`<br>• `prevalence_profile_per_target.csv` |
-| **08. Calibration Analysis** | [`calibration_recalibration_colab.ipynb`](08_calibration_recalibration/calibration_recalibration_colab.ipynb) | [`08_.../figures/`](08_calibration_recalibration/figures/)<br>• `supp_calibration_brier_reduction_by_dataset.png`<br>• `calibration_curve_*.png` | [`08_.../results/`](08_calibration_recalibration/results/)<br>• Brier & ECE metric tables<br>• Recalibration checkpoints |
-| **09. Explanation Stability** | [`explanation_stability_colab.ipynb`](09_explanation_stability/explanation_stability_colab.ipynb) | [`09_.../figures/`](09_explanation_stability/figures/)<br>• `fig07_explanation_reliability_gap.png`<br>• `supp_protocol_explanation_instability_heatmap.png` | [`09_.../results/`](09_explanation_stability/results/)<br>• `table06_explanation_reliability_gap.csv`<br>• Feature ranking summaries |
-| **10. Unified Audit Profile** | [`14_lcorf_bootstrap_alert_profile_colab.ipynb`](10_framework_formalization/14_lcorf_bootstrap_alert_profile_colab.ipynb) | [`10_.../figures/`](10_framework_formalization/figures/)<br>• `fig02_lcorf_final_audit_profile_heatmap.png`<br>• `fig06_alert_budget_precision_by_axis_dataset.png` | [`10_.../results/`](10_framework_formalization/results/)<br>• `lcorf_final_audit_profile.csv`<br>• `alert_budget_summary.csv`<br>• `paired_bootstrap_delta_summary.csv` |
+| **03. Leakage Stress Testing** | [`leakage_stress_multiseed_colab.ipynb`](03_leakage_stress_testing/leakage_stress_multiseed_colab.ipynb) | [`03_.../figures/`](03_leakage_stress_testing/figures/)<br>• `fig03_multiseed_ap_leakage_inflation_heatmap.pdf` | [`03_.../results/`](03_leakage_stress_testing/results/)<br>• `table03_key_bootstrap_findings.csv`<br>• Checkpoint CSVs |
+| **06. Temporal Robustness** | [`temporal_robustness_colab.ipynb`](06_temporal_robustness/temporal_robustness_colab.ipynb) | [`06_.../figures/`](06_temporal_robustness/figures/)<br>• `fig04_d2_drift_vs_temporal_drop.pdf`<br>• `temporal_ap_drop_heatmap.pdf` | [`06_.../results/`](06_temporal_robustness/results/)<br>• `d2_temporal_drift_diagnostics.csv`<br>• `d2_temporal_drop_summary.csv` |
+| **07. Prevalence Sensitivity** | [`prevalence_stress_colab.ipynb`](07_prevalence_stress_test/prevalence_stress_colab.ipynb) | [`07_.../figures/`](07_prevalence_stress_test/figures/)<br>• `fig05_prevalence_profile_heatmap.pdf`<br>• `supp_prevalence_precision_curve.pdf` | [`07_.../results/`](07_prevalence_stress_test/results/)<br>• `table08_prevalence_profile_component.csv`<br>• `prevalence_profile_per_target.csv` |
+| **08. Calibration Analysis** | [`calibration_recalibration_colab.ipynb`](08_calibration_recalibration/calibration_recalibration_colab.ipynb) | [`08_.../figures/`](08_calibration_recalibration/figures/)<br>• `supp_calibration_brier_reduction_by_dataset.pdf`<br>• `calibration_curve_*.pdf` | [`08_.../results/`](08_calibration_recalibration/results/)<br>• Brier & ECE metric tables<br>• Recalibration checkpoints |
+| **09. Explanation Stability** | [`explanation_stability_colab.ipynb`](09_explanation_stability/explanation_stability_colab.ipynb) | [`09_.../figures/`](09_explanation_stability/figures/)<br>• `fig07_explanation_reliability_gap.pdf`<br>• `supp_protocol_explanation_instability_heatmap.pdf` | [`09_.../results/`](09_explanation_stability/results/)<br>• `table06_explanation_reliability_gap.csv`<br>• Feature ranking summaries |
+| **10. Unified Audit Profile** | [`14_lcorf_bootstrap_alert_profile_colab.ipynb`](10_framework_formalization/14_lcorf_bootstrap_alert_profile_colab.ipynb) | [`10_.../figures/`](10_framework_formalization/figures/)<br>• `fig02_lcorf_final_audit_profile_heatmap.pdf`<br>• `fig06_alert_budget_precision_by_axis_dataset.pdf` | [`10_.../results/`](10_framework_formalization/results/)<br>• `lcorf_final_audit_profile.csv`<br>• `alert_budget_summary.csv`<br>• `paired_bootstrap_delta_summary.csv` |
 
 ---
 
@@ -157,7 +158,7 @@ pip install -r requirements.txt
 ### 2. Google Colab GPU Execution
 
 All notebooks in `03_...`, `06_...`, `07_...`, `08_...`, `09_...`, and `10_...` are configured for **Google Colab (T4 GPU runtime)**:
-* Automated Google Drive mounting preserves checkpoint CSVs and high-resolution figures.
+* Automated Google Drive mounting preserves checkpoint CSVs and vector PDF figures.
 * Resumable execution: if disconnected, rerunning the notebook automatically detects completed seeds and skips recomputation.
 
 ---
@@ -166,7 +167,7 @@ All notebooks in `03_...`, `06_...`, `07_...`, `08_...`, `09_...`, and `10_...` 
 
 ```
 lc-orf-financial-fraud-robustness/
-├── assets/                                 # Figure 1 workflow asset
+├── assets/                                 # Figure 1 workflow diagram
 │   └── fig01_lcorf_framework_workflow.png
 ├── 00_source_datasets/                     # Dataset drop directory & access notes
 │   ├── README.md                           # Download instructions & URLs
@@ -181,32 +182,32 @@ lc-orf-financial-fraud-robustness/
 │   └── feature_governance_table.md         # Formal governance criteria
 ├── 03_leakage_stress_testing/              # Axis 1: Leakage stress testing
 │   ├── leakage_stress_multiseed_colab.ipynb# 5-seed Colab notebook
-│   ├── figures/                            # 600-DPI heatmaps & cost charts
+│   ├── figures/                            # Vector PDF heatmaps & cost charts
 │   ├── results/                            # Metrics & seed checkpoints
 │   └── README.md                           # Axis documentation
 ├── 06_temporal_robustness/                 # Axis 2: Temporal robustness
 │   ├── temporal_robustness_colab.ipynb     # Chronological evaluation notebook
-│   ├── figures/                            # Drift & AP degradation plots
+│   ├── figures/                            # Vector PDF drift & AP drop plots
 │   ├── results/                            # Drift diagnostics & metrics
 │   └── README.md                           # Axis documentation
 ├── 07_prevalence_stress_test/              # Axis 3: Prevalence stress testing
 │   ├── prevalence_stress_colab.ipynb       # Base-rate shift notebook
-│   ├── figures/                            # Prevalence sensitivity heatmaps
+│   ├── figures/                            # Vector PDF prevalence heatmaps
 │   ├── results/                            # Fragility component tables
 │   └── README.md                           # Axis documentation
 ├── 08_calibration_recalibration/           # Axis 4: Calibration & recalibration
 │   ├── calibration_recalibration_colab.ipynb# Brier score & ECE notebook
-│   ├── figures/                            # Calibration curves & error plots
+│   ├── figures/                            # Vector PDF calibration curves
 │   ├── results/                            # Calibration metrics & checkpoints
 │   └── README.md                           # Axis documentation
 ├── 09_explanation_stability/               # Axis 5: Explanation stability (XAI)
 │   ├── explanation_stability_colab.ipynb   # Tree SHAP rank stability notebook
-│   ├── figures/                            # Explanation reliability gap plots
+│   ├── figures/                            # Vector PDF reliability gap plots
 │   ├── results/                            # Spearman rank correlation tables
 │   └── README.md                           # Axis documentation
 ├── 10_framework_formalization/             # Axis 6: Unified audit & alert budgeting
 │   ├── 14_lcorf_bootstrap_alert_profile_colab.ipynb # 1,000-bootstrap notebook
-│   ├── figures/                            # Final multi-axis audit heatmaps
+│   ├── figures/                            # Final multi-axis audit PDF heatmaps
 │   ├── results/                            # Consolidated profiles & budgets
 │   └── README.md                           # Module documentation
 ├── requirements.txt                        # Environment dependencies

@@ -10,9 +10,9 @@ This module consolidates prediction-export artifacts, runs 1,000 paired bootstra
 
 ## 📂 Folder Contents
 
-- **`figures/`**: Generated high-resolution figures (PNG at 600 DPI and vector PDF):
-  - `fig02_lcorf_final_audit_profile_heatmap.png` / `.pdf`: Consolidated multi-axis operational audit profile heatmap across all six evaluation dimensions.
-  - `fig06_alert_budget_precision_by_axis_dataset.png` / `.pdf`: Operational alert-budget precision curves under capacity constraints.
+- **`figures/`**: Generated publication-quality vector PDF figures:
+  - `fig02_lcorf_final_audit_profile_heatmap.pdf`: Consolidated multi-axis operational audit profile heatmap across all six evaluation dimensions.
+  - `fig06_alert_budget_precision_by_axis_dataset.pdf`: Operational alert-budget precision curves under capacity constraints.
 - **`results/`**: Comprehensive audit tables:
   - `lcorf_final_audit_profile.csv`: The definitive multi-axis audit profile table.
   - `paired_bootstrap_delta_summary.csv`: Summary of 1,000 paired bootstrap deltas and 95% confidence intervals.

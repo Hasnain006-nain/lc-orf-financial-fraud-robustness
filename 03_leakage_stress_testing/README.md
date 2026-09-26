@@ -9,11 +9,11 @@ This module evaluates the empirical impact of evaluation protocol leakage across
 
 ## 📂 Folder Contents
 
-- **`figures/`**: Generated high-resolution figures (PNG at 600 DPI and vector PDF):
-  - `fig03_multiseed_ap_leakage_inflation_heatmap.png` / `.pdf`: Primary audit heatmap demonstrating AP inflation under unsafe SMOTE.
-  - `multiseed_cost_delta_per_10k_by_dataset.png`: Operating cost distortions per 10k transactions.
-  - `multiseed_lii_average_precision_by_dataset.png`: Leakage Inflation Index (LII) across models.
-  - `multiseed_lii_mcc_by_dataset.png`: MCC inflation across seeds.
+- **`figures/`**: Generated publication-quality vector PDF figures:
+  - `fig03_multiseed_ap_leakage_inflation_heatmap.pdf`: Primary audit heatmap demonstrating AP inflation under unsafe SMOTE.
+  - `multiseed_cost_delta_per_10k_by_dataset.pdf`: Operating cost distortions per 10k transactions.
+  - `multiseed_lii_average_precision_by_dataset.pdf`: Leakage Inflation Index (LII) across models.
+  - `multiseed_lii_mcc_by_dataset.pdf`: MCC inflation across seeds.
 - **`results/`**: Output metrics and checkpoints:
   - `table03_key_bootstrap_findings.csv`: Key 1,000-replicate paired bootstrap significance deltas.
   - `partial_metrics_latest.csv`: Latest consolidated metrics.
