@@ -1,26 +1,26 @@
 # LC-ORF Reproducibility Package
 
-This directory provides comprehensive documentation, execution instructions, and environment configurations to reproduce all empirical evaluations reported in the manuscript:
-
-> **LC-ORF: A Leakage-Controlled Operational Robustness Framework for Financial Fraud Detection**
+This directory provides comprehensive documentation, execution instructions, and environment configurations to reproduce all empirical evaluations in the **LC-ORF (Leakage-Controlled Operational Robustness Framework)** research benchmark.
 
 ---
 
 ## 1. Reproduction Architecture
 
-The LC-ORF evaluation pipeline audits models under controlled perturbations rather than a single static split. Experiments are organized into modular, reproducible milestones:
+The LC-ORF evaluation pipeline audits fraud detection models under controlled perturbations rather than a single static split. Experiments are organized into modular milestones:
 
 ```
-01_dataset_truth_audit/        -> Raw data auditing, duplicate detection, and integrity checks
-02_feature_governance/          -> Strict vs. stress feature sets, leakage-safe exclusions
-03_leakage_stress_testing/      -> Safe split vs. unsafe SMOTE-before-split & ledger leakage
-06_temporal_robustness/         -> Stratified random split vs. chronological sequential split
-07_prevalence_stress_test/      -> Deterministic base-rate downsampling across 6 target ratios
-08_calibration_recalibration/   -> ECE, Brier score, Platt scaling, and Isotonic regression
-09_explanation_stability/       -> Spearman rank correlation & Top-K feature importance Jaccard
-10_framework_formalization/     -> Formalization, 1000-sample bootstrap intervals & alert budget
-13_paper_submission_assets/     -> Generated figures (PDF/PNG 600 DPI) and manuscript source tables
-14_lcorf_manuscript_rebuild/    -> IEEE Access LaTeX manuscript, author bios, and references
+00_source_datasets/           -> Public dataset destination directory
+00_source_datasets_notes/     -> Dataset verification, hashes, and size notes
+01_dataset_truth_audit/       -> Raw data auditing, duplicate detection, and integrity checks
+02_feature_governance/        -> Strict vs. stress feature sets, leakage-safe exclusions
+03_leakage_stress_testing/    -> Safe split vs. unsafe SMOTE-before-split & ledger leakage
+06_temporal_robustness/       -> Stratified random split vs. chronological sequential split
+07_prevalence_stress_test/    -> Deterministic base-rate downsampling across 6 target ratios
+08_calibration_recalibration/ -> ECE, Brier score, Platt scaling, and Isotonic regression
+09_explanation_stability/     -> Spearman rank correlation & Top-K feature importance Jaccard
+10_framework_formalization/   -> Formalization, 1,000-sample bootstrap intervals & alert budget
+12_github_reproducibility/    -> Environment requirements, setup guides, and execution pipeline
+13_evaluation_artifacts/      -> High-resolution figures (PDF/PNG 600 DPI) and audit tables
 ```
 
 ---
@@ -32,9 +32,13 @@ The LC-ORF evaluation pipeline audits models under controlled perturbations rath
 Create a clean virtual environment and install the required dependencies:
 
 ```bash
-# Create and activate environment
+# Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: .\venv\Scripts\Activate.ps1
+
+# On Linux / macOS:
+source venv/bin/activate
+# On Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
 
 # Install dependencies
 pip install -r requirements.txt
@@ -92,8 +96,8 @@ For end-to-end reproduction of the audit results:
 
 ## 4. Verification & Artifact Validation
 
-All reported numbers in the manuscript correspond directly to saved CSV files:
-- Source result profiles: `13_paper_submission_assets/02_supplementary_assets/tables/source_results/`
+All reported empirical numbers correspond directly to saved CSV files:
+- Source result profiles: `13_evaluation_artifacts/02_extended_results_and_data/tables/source_results/`
 - Bootstrap summary: `paired_bootstrap_delta_summary.csv`
 - Final multi-axis audit profile: `lcorf_final_audit_profile.csv`
 - Alert budget performance: `alert_budget_summary.csv`

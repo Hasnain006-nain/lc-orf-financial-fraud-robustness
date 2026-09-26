@@ -1,119 +1,75 @@
-# Credit Fraud Paper Project Status
+# LC-ORF Framework Project Status
 
-## Current Research Direction
+## Research Direction & Framework Objective
 
-The paper is being rebuilt from a model-comparison study into a novelty-focused operational evaluation framework for financial fraud detection.
+LC-ORF establishes a novelty-focused operational evaluation and stress-testing framework for financial fraud detection.
 
-Working thesis:
+**Working thesis:**
 
-> A leakage-controlled operational stress-testing framework can show that fraud-detection model choice is unstable under feature availability, leakage risk, cost assumptions, review capacity, calibration quality, prevalence shift, and temporal ordering.
+> A leakage-controlled operational stress-testing framework demonstrates that fraud-detection model choice and operational efficacy are highly sensitive to feature availability, leakage risk, cost assumptions, review capacity, calibration quality, prevalence shifts, and temporal ordering.
 
-## Completed Work
+---
+
+## Milestone Progress
 
 ### 01 Dataset Truth Audit
-
-Location: `01_dataset_truth_audit/`
-
-Completed:
-
-- Audited `creditcard.csv`, `fraudTest.csv`, and `PS.csv`.
-- Recorded rows, fraud counts, fraud rates, duplicates, missing values, label columns, time fields, identifier-risk columns, high-cardinality columns, and leakage-review columns.
-- Confirmed D1 duplicate removal explains the manuscript's cleaned count: 283,726 rows and 473 fraud rows.
-- Flagged D2 `Unnamed: 0` and `trans_num` as mandatory removals.
-- Flagged D3 `isFlaggedFraud`, `nameOrig`, `nameDest`, `newbalanceOrig`, and `newbalanceDest` as high-risk columns requiring governance.
-
-Key files:
-
-- `dataset_truth_audit.md`
-- `dataset_audit_summary.csv`
-- `supplemental_risk_findings.csv`
+- **Location:** `01_dataset_truth_audit/`
+- Audited `creditcard.csv` (D1), `fraudTest.csv` (D2), and `PS.csv` (D3).
+- Confirmed row counts, fraud ratios, duplicates, missing values, and time fields.
+- Verified D1 deduplication (284,807 down to 283,726 rows).
+- Flagged identifier-risk features (e.g. `trans_num`, `Unnamed: 0`, and post-transaction balance fields).
 
 ### 02 Feature Governance
-
-Location: `02_feature_governance/`
-
-Completed:
-
-- Created a column-level governance table for all three datasets.
-- Defined the main `strict` feature set for the revised paper.
-- Defined separate feature-set tiers for chronology, operational context, ledger-state stress, and sensitive/proxy variables.
-- Established that D3 post-transaction balances are excluded from the strict main protocol and used only in a leakage/ledger-state stress test.
-
-Key files:
-
-- `feature_governance_table.md`
-- `feature_governance_table.csv`
-- `feature_set_definitions.csv`
+- **Location:** `02_feature_governance/`
+- Established column-level governance rules across all three benchmarks.
+- Defined the **Strict Main Feature Set** excluding future or post-transaction fields.
+- Isolated post-transaction ledger balances for dedicated leakage stress experiments.
 
 ### 03 Leakage Stress Testing
+- **Location:** `03_leakage_stress_testing/`
+- Implemented Google Colab T4 GPU notebooks with resumable checkpointing.
+- Tested safe pipelines against unsafe SMOTE-before-split and ledger-state leakage across 5 random seeds (42, 101, 202, 303, 404).
 
-Location: `03_leakage_stress_testing/`
+### 06 Temporal Robustness
+- **Location:** `06_temporal_robustness/`
+- Quantified performance drops between random stratified splits and chronological splits.
+- Computed feature drift metrics and temporal degradation curves.
 
-Prepared:
+### 07 Prevalence Stress Testing
+- **Location:** `07_prevalence_stress_test/`
+- Evaluated models across 6 deterministic prevalence shift tiers.
+- Generated prevalence sensitivity profiles and alert-cost heatmaps.
 
-- Created a Google Colab notebook for T4 GPU runtime.
-- Added Drive mounting and configurable `PROJECT_ROOT`.
-- Added resumable per-dataset/per-scenario/per-model checkpoints.
-- Added automatic Drive output folders for checkpoints, results, logs, and figures.
-- Added 600-DPI PNG and PDF figure export.
-- Implemented strict feature rules from the feature governance milestone.
-- Implemented safe pipeline, unsafe preprocessing stress, unsafe SMOTE-before-split stress, and D3 ledger-state stress.
+### 08 Calibration & Recalibration
+- **Location:** `08_calibration_recalibration/`
+- Measured Brier score, ECE, Platt scaling, and Isotonic regression.
+- Demonstrated decoupling between probability calibration and downstream cost.
 
-Key files:
+### 09 Explanation Stability
+- **Location:** `09_explanation_stability/`
+- Assessed SHAP and Tree feature attribution stability across seeds and temporal splits.
+- Discovered the *Explanation Reliability Gap* where feature rank stability persists despite predictive drop.
 
-- `leakage_stress_testing_colab.ipynb`
-- `README.md`
-- `leakage_stress_multiseed_colab.ipynb`
-- `README_multiseed.md`
+### 10 Framework Formalization & Bootstrap Profiling
+- **Location:** `10_framework_formalization/`
+- Formalized audit units $(d, m, s, a, c_0, c_1, k)$ and metric materiality thresholds.
+- Computed 1,000 paired bootstrap confidence intervals.
+- Integrated fixed alert-budget capacity metrics (top 1%, 2%, 5%).
 
-Prepared next:
+### 12 Reproducibility Hardening
+- **Location:** `12_github_reproducibility/`
+- Created environment setup guides and execution pipelines.
 
-- Created a five-seed leakage robustness notebook using XGBoost and LightGBM.
-- Seeds: 42, 101, 202, 303, 404.
-- Expected Colab T4 runtime: 45-75 minutes; allow up to 90 minutes if Drive I/O is slow.
-- Outputs save under `03_leakage_stress_testing/leakage_stress_multiseed_v1/`.
+### 13 Evaluation Artifacts
+- **Location:** `13_evaluation_artifacts/`
+- Consolidated 600-DPI publication figures, bootstrap delta summaries, and prediction manifests.
 
-### 11 Manuscript Rewrite
+---
 
-Goal:
+## Core Operational Rules
 
-Rewrite the LaTeX manuscript around the LC-ORF framework and IEEE Access resubmission standards.
-
-Completed:
-
-- Created a new IEEE Access manuscript draft centered on LC-ORF instead of model comparison.
-- Added a new title, abstract, contributions, methodology, results, discussion, limitations, bibliography, and author biographies.
-- Selected five main-paper figures and copied them into `11_manuscript_rewrite/paper_figures/`.
-- Copied the deliverable package to `outputs/milestone_11_manuscript_rewrite/`.
-- Verified that all LaTeX citations have matching BibTeX entries, all BibTeX entries are cited, the five selected paper figures exist, and no TODO/TBD placeholders remain.
-
-Key files:
-
-- `11_manuscript_rewrite/main.tex`
-- `11_manuscript_rewrite/references.bib`
-- `11_manuscript_rewrite/README.md`
-- `11_manuscript_rewrite/paper_figures/`
-
-## Next Milestone
-
-### 12 Reproducibility and Submission Hardening
-
-Goal:
-
-Prepare the rewritten manuscript for IEEE Access-quality submission by checking compilation, source traceability, result-table accuracy, figure readability, bibliography metadata, and GitHub reproducibility.
-
-Immediate work:
-
-1. Compile the manuscript inside the official IEEE Access LaTeX template.
-2. Fix any LaTeX class, bibliography, float, author-photo, or figure-path issues.
-3. Cross-check every numeric claim in `main.tex` against the saved CSV files.
-4. Verify all bibliography metadata from publisher or dataset pages.
-5. Prepare a clean GitHub reproduction package with notebooks, environment notes, and result manifests.
-
-## Non-Negotiable Rules
-
-- No result can be reported without a saved CSV output.
-- Every paper table/figure must map to a saved result file.
-- The main paper must use the strict protocol as the primary result.
-- Leakage-risk or identity-risk features can appear only in explicitly labeled stress tests.
-- Do not call the work production-ready.
+1. No empirical result is reported without a saved CSV output.
+2. Every benchmark table and figure maps directly to an exported artifact.
+3. Strict feature protocol is enforced as the baseline reference.
+4. Leakage-risk features appear exclusively in controlled stress tests.
+5. Models are audited as operational profiles, not single static leaderboard scores.
