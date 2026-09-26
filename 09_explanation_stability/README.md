@@ -21,4 +21,4 @@ This module audits the stability of explainable AI (XAI) feature attributions (T
 
 ## 🎯 Key Findings
 
-- **The Explanation Reliability Gap:** Top feature rankings remained highly correlated (Spearman $\rho > 0.90$) even when models suffered severe temporal predictive collapse (AP drop $> 0.20$), showing that stable explanations do not imply reliable predictions.
+- **The Explanation Reliability Gap:** Explanation rankings can remain stable while predictive behavior shifts, especially on D2. High attribution rank alignment indicates that explanation stability does not guarantee preservation of operational classification performance under temporal distribution change.

@@ -6,17 +6,17 @@
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Framework](https://img.shields.io/badge/Framework-LC--ORF-10B981?style=for-the-badge&logo=shield&logoColor=white)](#-framework-architecture)
 [![Colab Ready](https://img.shields.io/badge/Google_Colab-T4_GPU_Ready-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white)](#-experiment-modules--notebook-suite)
-[![Audit](https://img.shields.io/badge/Bootstrap-1000_Replicates-6366F1?style=for-the-badge)](#-key-empirical-findings)
+[![Audit](https://img.shields.io/badge/Audit-1000_Replicates-6366F1?style=for-the-badge)](#-key-empirical-findings)
 [![Figures](https://img.shields.io/badge/Figures-Vector_PDF-EC1C24?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](#-experiment-modules--notebook-suite)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 
 <br/>
 
 [**Overview**](#-overview) •
-[**Framework Workflow**](#-framework-architecture) •
+[**Framework Architecture**](#-framework-architecture) •
 [**Modules & Notebooks**](#-experiment-modules--notebook-suite) •
 [**Key Findings**](#-key-empirical-findings) •
-[**Datasets & Governance**](#-datasets--governance) •
+[**Datasets & Accounting**](#-datasets--governance) •
 [**Quickstart**](#-quickstart-guide) •
 [**Citation**](#-citation)
 
@@ -26,16 +26,16 @@
 
 ## 💡 Overview
 
-In deployed financial fraud detection systems, models often experience dramatic post-deployment degradation. The root cause is a fundamental evaluation gap: **fraud models are traditionally evaluated as static leaderboard benchmarks** using single random splits and summary metrics (e.g., ROC-AUC) that mask operational hazards:
+In production financial fraud detection systems, models often encounter **material degradation under operational conditions**. This gap typically arises because **fraud detection systems are conventionally evaluated as static leaderboard benchmarks** using single random splits and summary metrics (such as ROC-AUC) that mask operational vulnerabilities:
 
-* 🚨 **Preprocessing Leakage:** Resampling (such as SMOTE) or normalization applied prior to data splitting leaks future distribution information into the training set.
-* 📉 **Temporal Invalidation:** Random splits allow models to peek into the future, hiding severe performance collapse under true chronological transaction arrival.
-* ⚠️ **Prevalence Shifts:** The base fraud rate fluctuates continuously in production, causing severe false alarm spikes if models are sensitive to prevalence changes.
-* 🎯 **Uncalibrated Probability Scores:** Classification rankings do not guarantee calibrated probabilities for automated cutoff thresholding and risk scoring.
-* 🔍 **The Explanation Reliability Gap:** Feature attribution rankings (e.g. Tree SHAP) can remain superficially stable even while predictive performance collapses.
-* ⏱️ **Alert-Budget Bottlenecks:** Human review teams have hard daily alert capacities; high recall at arbitrary thresholds is operationally useless without high precision in the top budget tiers (e.g., top 1% or 2%).
+* 🧪 **Preprocessing Leakage:** Resampling (e.g., SMOTE) or normalization applied prior to data splitting leaks future distribution characteristics, leading to **inflated measured performance**.
+* ⏳ **Temporal Invalidation:** Random splits allow models access to future distributional information, obscuring **material degradation under chronological evaluation**.
+* 📉 **Prevalence Shifts:** The operational fraud base rate varies across payment periods, inducing **evaluation-protocol sensitivity** and elevated false positive rates during volume shifts.
+* 🎯 **Uncalibrated Probability Scores:** High classification ranking does not guarantee calibrated probabilities for automated cutoff thresholding and risk scoring.
+* 🔍 **The Explanation Reliability Gap:** Feature attribution rankings can remain stable while predictive behavior shifts, especially under temporal distribution change.
+* ⏱️ **Alert-Budget Bottlenecks:** Human investigator teams operate under strict daily review capacities, making unconstrained recall less informative than precision at realistic alert budgets (e.g., top 1% or 2%).
 
-**LC-ORF (Leakage-Controlled Operational Robustness Framework)** introduces an active audit methodology. Instead of accepting a single leaderboard score, LC-ORF evaluates models across controlled reference-stress scenario pairs, producing auditable operational profiles backed by 1,000 paired bootstrap iterations.
+**LC-ORF (Leakage-Controlled Operational Robustness Framework)** introduces a structured evaluation methodology. Instead of accepting a single leaderboard score, LC-ORF evaluates models across controlled reference-stress scenario pairs, generating auditable operational profiles backed by **1,000 bootstrap replicates where applicable, with paired, stratified unpaired, or deterministic summaries depending on the scenario pair**.
 
 ---
 
@@ -52,7 +52,7 @@ The LC-ORF protocol executes in **five structured stages**:
 2. **Stage 2 (Leakage-Safe Feature Governance):** Systematic removal of transactional identifiers, future variables, and ledger-state balances to establish a leak-free **Strict Main Feature Set**.
 3. **Stage 3 (Scenario-Pair Perturbations):** Controlled evaluation comparing reference conditions ($c_0$) against targeted stress conditions ($c_1$) across 6 operational axes.
 4. **Stage 4 (Model & Artifact Layer):** 5-seed tree-based ensemble training (LightGBM & XGBoost) exporting granular predictions (scores, ground-truth labels, decision thresholds).
-5. **Stage 5 (Audit Profile & Significance):** 1,000 paired bootstrap resamples per unit evaluated against metric materiality thresholds to produce auditable **Robust**, **Fragile**, or **Inconclusive** profiles.
+5. **Stage 5 (Audit Profile & Significance):** 1,000 bootstrap replicates where applicable, with paired, stratified unpaired, or deterministic summaries depending on the scenario pair, evaluated against metric materiality thresholds to produce auditable **Robust**, **Fragile**, or **Inconclusive** profiles.
 
 ---
 
@@ -73,26 +73,26 @@ Each experiment module is completely self-contained with its own notebook, dedic
 
 ## 📈 Key Empirical Findings
 
-Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 paired bootstrap iterations**:
+Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 bootstrap replicates where applicable**:
 
 ```
  ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
- │ 🚨 Massive Resampling Leakage Inflation                                                         │
- │    Applying SMOTE before train/test splitting inflated MCC by +0.472 on D2 and +0.357 on D1.   │
- │    This proves standard benchmark oversampling protocols report phantom performance.            │
+ │ 🧪 Pronounced Resampling Leakage Inflation                                                      │
+ │    Applying SMOTE before train/test splitting inflated MCC by up to +0.472 on D2 and           │
+ │    +0.357 on D1, demonstrating that unsafe oversampling yields inflated measured performance.  │
  ├─────────────────────────────────────────────────────────────────────────────────────────────────┤
- │ 📉 Severe Chronological Degradation                                                             │
- │    Moving from random split to chronological evaluation reduced Average Precision by            │
- │    -0.277 (XGBoost) and -0.245 (LightGBM) on D2 due to unmasked transaction drift.              │
+ │ ⏳ Material Degradation Under Chronological Evaluation                                          │
+ │    Chronological evaluation on D2 reduced Average Precision by -0.277 for XGBoost and          │
+ │    -0.245 for LightGBM relative to random stratified splitting, reflecting temporal drift.      │
  ├─────────────────────────────────────────────────────────────────────────────────────────────────┤
- │ ⚠️ High Prevalence Fragility (80.6%)                                                            │
+ │ 📉 Marked Prevalence Sensitivity (80.6%)                                                        │
  │    29 out of 36 evaluated prevalence-profile components were labeled operationally Fragile      │
- │    under base-rate shifts, exposing high vulnerability in production volume shifts.            │
+ │    under base-rate variations, revealing substantial sensitivity to transaction volume shifts.  │
  ├─────────────────────────────────────────────────────────────────────────────────────────────────┤
  │ 🔍 The Explanation Reliability Gap                                                             │
- │    Top feature importance rankings remained highly correlated (Spearman rho > 0.90)          │
- │    even when models suffered severe predictive collapse, proving XAI stability does not         │
- │    guarantee model reliability.                                                                 │
+ │    Explanation rankings can remain stable while predictive behavior shifts, especially on D2.   │
+ │    This indicates that feature attribution stability does not guarantee preservation of        │
+ │    underlying predictive accuracy under non-stationary conditions.                              │
  └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -121,15 +121,17 @@ Audited across **5 random seeds**, **3 benchmark datasets**, and **1,000 paired 
 
 LC-ORF evaluates three widely recognized financial fraud benchmarks under leakage-safe feature governance:
 
-| ID | Dataset | Domain | Raw Records | Frauds | Cleaned Records | Feature Governance Protocol |
-| :---: | :--- | :--- | :---: | :---: | :---: | :--- |
-| **D1** | [ULB Credit Card](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) | European card payments | 284,807 | 492 (0.17%) | **283,726** | Removed 1,081 duplicate transactions |
-| **D2** | [Fraud Detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) | Merchant transactions | 555,719 | 2,145 (0.39%) | **555,719** | Stripped index artifact `Unnamed: 0` and ID `trans_num` |
-| **D3** | [PaySim Mobile Money](https://www.kaggle.com/datasets/ealaxi/paysim1) | Mobile payments | 5,840,046 | 4,497 (0.08%) | **5,840,046** | Isolated post-transaction ledger balances (`newbalance*`) |
+| ID | Dataset | Domain | Evaluation Artifact Rows | Fraud Count (%) | Feature Governance Protocol | Public Access Link |
+| :---: | :--- | :--- | :---: | :---: | :--- | :--- |
+| **D1** | Credit Card Fraud (ULB) | European card payments | **284,807** | 492 (0.173%) | Governed strict features; duplicate pre-audit noted below | [Kaggle: Credit Card Fraud](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) |
+| **D2** | Fraud Detection (Kartik Shenoy) | Merchant transactions | **555,719** | 2,145 (0.386%) | Removed index artifact `Unnamed: 0` and ID `trans_num` | [Kaggle: Credit Card Transactions](https://www.kaggle.com/datasets/kartik2112/fraud-detection) |
+| **D3** | PaySim Mobile Money | Mobile payments | **5,840,046** | 4,497 (0.077%) | Filtered transfer/cash-out; post-balances isolated | [Kaggle: PaySim1 Dataset](https://www.kaggle.com/datasets/ealaxi/paysim1) |
 
 > [!NOTE]
-> **Data Access Policy:** Raw CSV files (~800 MB uncompressed) are excluded from the repository.
-> To run experiments requiring raw data, download the CSV files (`creditcard.csv`, `fraudTest.csv`, `PS.csv`) using the Kaggle links above and place them into [00_source_datasets/](00_source_datasets/). Detailed checksums and verification notes are documented in [00_source_datasets/DATASET_ACCESS_NOTE.md](00_source_datasets/DATASET_ACCESS_NOTE.md).
+> **Dataset Accounting & Verification:**
+> - **D1 Row Accounting:** The manuscript and evaluation artifact records contain **284,807 rows** (492 fraud cases, 0.173%), which is the canonical public benchmark. Data auditing in [`01_dataset_truth_audit/`](01_dataset_truth_audit/) documents 1,081 duplicate transactions (leaving 283,726 unique transactions with 473 fraud cases). The evaluation protocol uses the canonical 284,807 evaluation artifact rows consistent with the published literature while auditing feature properties.
+> - **Data Access Policy:** Raw CSV files (~800 MB uncompressed) are excluded from the repository. Download the CSV files (`creditcard.csv`, `fraudTest.csv`, `PS.csv`) using the links above and place them into [`00_source_datasets/`](00_source_datasets/).
+> - See [00_source_datasets/DATASET_ACCESS_NOTE.md](00_source_datasets/DATASET_ACCESS_NOTE.md) and [`01_dataset_truth_audit/`](01_dataset_truth_audit/) for detailed checksums, schema definitions, and feature risk classifications.
 
 ---
 
@@ -167,10 +169,10 @@ All notebooks in `03_...`, `06_...`, `07_...`, `08_...`, `09_...`, and `10_...` 
 
 ```
 lc-orf-financial-fraud-robustness/
-├── assets/                                 # Figure 1 workflow diagram
+├── assets/                                 # Workflow architecture figure
 │   └── fig01_lcorf_framework_workflow.png
 ├── 00_source_datasets/                     # Dataset drop directory & access notes
-│   ├── README.md                           # Download instructions & URLs
+│   ├── README.md                           # Download instructions & accounting notes
 │   └── DATASET_ACCESS_NOTE.md              # Checksums, sizes, and row counts
 ├── 01_dataset_truth_audit/                 # Duplicate checks & ground-truth audit
 │   ├── dataset_audit_summary.csv           # Summary statistics
