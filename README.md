@@ -12,6 +12,11 @@
 
 <br/>
 
+## Claim Verification and Full-Profile Value
+
+- [Artifact claim-verification table](10_framework_formalization/results/artifact_claim_verification_table.md)
+- [Full-profile value / ablation table](10_framework_formalization/results/full_profile_value_ablation_table.md)
+
 [**Overview**](#-overview) •
 [**Framework Architecture**](#-framework-architecture) •
 [**Modules & Notebooks**](#-experiment-modules--notebook-suite) •
